@@ -28,3 +28,20 @@ body{
   outline: none;
   margin: 10px;
 }
+
+.weather-city{
+  color: white;
+  margin: 20px;
+}
+
+.weather-row{
+  display: flex;
+  flex-direction: row;
+  color: white;
+  margin: 10px;
+  padding: auto;
+}
+
+.weather-column{
+  flex-basis: 50%;
+}
