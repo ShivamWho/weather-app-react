@@ -22,6 +22,33 @@ function App() {
       <div className='weather-cloud'>
         <FeatherIcon icon="cloud-rain" color="white" size="60" />
       </div>
+
+      <div className='weather-city'>
+        <h1>Mumbai</h1>
+      </div>
+
+      <div className="weather-row">
+         <div className="weather-column">
+            <FeatherIcon icon="sun" color="white"/>
+            <p>Temp: 38 "C</p>
+         </div>
+         <div className="weather-column">
+            <FeatherIcon icon="command" color="white"/>
+            <p>Preassure: 3000</p>
+         </div>
+      </div>
+
+      <div className="weather-row">
+         <div className="weather-column">
+            <FeatherIcon icon="cloud" color="white"/>
+            <p>Humidity: 79</p>
+         </div>
+         <div className="weather-column">
+            <FeatherIcon icon="wind" color="white"/>
+            <p>Wind: 3.6</p>
+         </div>
+      </div>
+      
     </div>
   );
 }
