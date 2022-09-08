@@ -2,8 +2,36 @@ import React from 'react';
 import './App.css';
 import SearchField from "react-search-field";
 import FeatherIcon from 'feather-icons-react';
+import axios from 'axios';
+import {useEffect, useState} from 'react';
+
 
 function App() {
+
+const [city,setcity] = useState('');
+const [temp,settemp] = useState(0);
+const [Humidity,sethumidity] = useState(0);
+const [search,setsearch] = useState('delhi');
+const [pressure,setpressure] = useState(0);
+const [wind,setwind] = useState(0);
+
+useEffect(()=>{
+
+  axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=72227c9d40eda38f52df5b3f649d5b58`).then((res)=>{
+
+     console.log("res",res);
+     settemp(res.data.main.temp);
+     setpressure(res.data.main.pressure);
+     sethumidity(res.data.main.humidity);
+     setwind(res.data.wind.speed);
+     setcity(res.data.name);
+
+
+  })
+
+},[search]);
+
+
   return (
     <div className='weather-box'>
       <div className='weather-header'>
@@ -12,10 +40,10 @@ function App() {
       <div className='weather-search'>
         <SearchField
           placeholder="Search..."
-          onChange={(value)=>{
-            console.log(value)
+          onSearchClick={(value)=>{
+            setsearch(value);
           }}
-          searchText="This is initial search text"
+          searchText={search}
           classNames="weather-input"
         />
       </div>
@@ -24,28 +52,28 @@ function App() {
       </div>
 
       <div className='weather-city'>
-        <h1>Mumbai</h1>
+        <h1> {city} </h1>
       </div>
 
       <div className="weather-row">
          <div className="weather-column">
             <FeatherIcon icon="sun" color="white"/>
-            <p>Temp: 38 "C</p>
+            <p>Temp: {(temp - 273.15).toFixed(2)} "C</p>
          </div>
          <div className="weather-column">
             <FeatherIcon icon="command" color="white"/>
-            <p>Preassure: 3000</p>
+            <p>Preassure: {pressure}</p>
          </div>
       </div>
 
       <div className="weather-row">
          <div className="weather-column">
             <FeatherIcon icon="cloud" color="white"/>
-            <p>Humidity: 79</p>
+            <p>Humidity: {Humidity}</p>
          </div>
          <div className="weather-column">
             <FeatherIcon icon="wind" color="white"/>
-            <p>Wind: 3.6</p>
+            <p>Wind: {wind}</p>
          </div>
       </div>
       
